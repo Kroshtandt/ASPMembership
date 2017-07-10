@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+
+<h2>Edit User</h2>
+<h4 data-bind="text: UserId"></h4>
+<br />
+<div class="row">
+    <div class="col-lg-6">
+        <h4 class="text-right">System Roles</h4>
+        <div class="list-group" data-bind="foreach: Roles" style="padding: 15px;">
+            <a href="#" class="list-group-item row" data-bind="click: function(){$root.attachRoleToUser($data)}">
+                <div class="col-xs-6" data-bind="text: $data.Name"></div>
+                <div class="col-xs-6 text-right"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <h4>User Roles</h4>
+        <div class="list-group" data-bind="foreach: UserRoles" style="padding: 15px;">
+            <a href="#" class="list-group-item row" data-bind="click: function(){$root.detachRoleFromUser($data)}">
+                <div class="col-xs-6"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></div>
+
+                <div class="col-xs-6 text-right" data-bind="text: $data.Name"></div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        @Html.ActionLink("Back to List", "UsersList")
+    </div>
+</div>
+
+<script>
+    userId = '@ViewBag.UserId';
+</script>
+<script src="~/Scripts/controllers/UserEditController.js"></script>
